@@ -1,5 +1,6 @@
-import express, { Express, NextFunction, Request, Response } from "express";
+import express, { Express } from "express";
 import cors from "cors";
+import usuariosRoutes from "./routes/usuarios";
 
 let server: Express = express();
 let port: number = Number(process.env.SERVER_PORT || 3000);
@@ -7,9 +8,7 @@ let port: number = Number(process.env.SERVER_PORT || 3000);
 server.use(cors());
 server.use(express.json());
 
-server.get("/teste", async (req, res) => {
-  res.send("Olá");
-});
+server.use(usuariosRoutes);
 
 export default {
   start() {
