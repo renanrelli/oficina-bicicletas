@@ -16,9 +16,6 @@ export class Cliente extends BaseEntity {
   @Column()
   public nome: string;
 
-  @Column({ select: false })
-  public senha: string;
-
   @Column({ unique: true })
   public email: string;
 
@@ -28,7 +25,7 @@ export class Cliente extends BaseEntity {
   @Column({
     type: "date",
   })
-  public data_nascimento: Date;
+  public data_nascimento: string;
 
   @Column()
   public endereco: string;

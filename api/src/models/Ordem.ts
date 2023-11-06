@@ -22,6 +22,7 @@ export class Ordem extends BaseEntity {
 
   @Column({
     type: "date",
+    nullable: true,
   })
   public data_entrega: Date;
 
