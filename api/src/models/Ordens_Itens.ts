@@ -9,7 +9,7 @@ import {
 import { Ordem } from "./Ordem";
 import { Item } from "./Item";
 
-@Entity("itens")
+@Entity("ordens_itens")
 export class Ordens_Itens extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id: number;

@@ -14,7 +14,6 @@ export class ClientesController {
 
   async create(req: Request, res: Response) {
     let body = req.body;
-    console.log(body);
 
     let cliente: Cliente = await Cliente.create({
       nome: body.nome,

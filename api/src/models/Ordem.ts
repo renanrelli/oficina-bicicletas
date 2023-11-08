@@ -18,13 +18,13 @@ export class Ordem extends BaseEntity {
   @Column({
     type: "date",
   })
-  public data_recebimento: Date;
+  public data_recebimento: string;
 
   @Column({
     type: "date",
     nullable: true,
   })
-  public data_entrega: Date;
+  public data_entrega: string;
 
   @Column()
   public descricao: string;
