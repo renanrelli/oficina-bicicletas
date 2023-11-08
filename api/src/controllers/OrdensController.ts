@@ -4,12 +4,12 @@ import { ILike } from "typeorm";
 
 export class ItensController {
   async list(req: Request, res: Response) {
-    let id: number = Number(req.params.id);
+    let nome = req.query.nome;
 
-    let itens: Item[] = await Item.findBy({
-      id: id ? id : undefined,
+    let users: Item[] = await Item.findBy({
+      nome: nome ? ILike(`${nome}`) : undefined,
     });
-    return res.status(200).json(itens);
+    return res.status(200).json(users);
   }
 
   async create(req: Request, res: Response) {
@@ -20,6 +20,11 @@ export class ItensController {
       valor: body.valor,
     }).save();
 
+    return res.status(200).json(item);
+  }
+
+  async find(req: Request, res: Response): Promise<Response> {
+    let item = res.locals.item;
     return res.status(200).json(item);
   }
 

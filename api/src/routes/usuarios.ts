@@ -75,7 +75,7 @@ let usuariosController: UsuariosController = new UsuariosController();
 
 router.get("/usuarios", usuariosController.list);
 
-router.get("/usuarios/:id", validarSeExiste, usuariosController.find);
+router.get("/usuarios/:id", validarSeExiste, usuariosController.list);
 
 router.post(
   "/usuarios",

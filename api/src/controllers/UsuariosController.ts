@@ -5,10 +5,10 @@ import { ILike } from "typeorm";
 
 export class UsuariosController {
   async list(req: Request, res: Response) {
-    let nome = req.query.nome;
+    let id: number = Number(req.params.id);
 
     let users: Usuario[] = await Usuario.findBy({
-      nome: nome ? ILike(`${nome}`) : undefined,
+      id: id ? id : undefined,
     });
     return res.status(200).json(users);
   }
@@ -27,11 +27,6 @@ export class UsuariosController {
     let { senha: s, ...usuarioSemSenha } = usuario;
 
     return res.status(200).json(usuarioSemSenha);
-  }
-
-  async find(req: Request, res: Response): Promise<Response> {
-    let usuario = res.locals.usuario;
-    return res.status(200).json(usuario);
   }
 
   async update(req: Request, res: Response): Promise<Response> {

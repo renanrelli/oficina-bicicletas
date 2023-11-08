@@ -4,10 +4,10 @@ import { ILike } from "typeorm";
 
 export class ClientesController {
   async list(req: Request, res: Response) {
-    let nome = req.query.nome;
+    let id: number = Number(req.query.id);
 
     let users: Cliente[] = await Cliente.findBy({
-      nome: nome ? ILike(`${nome}`) : undefined,
+      id: id ? id : undefined,
     });
     return res.status(200).json(users);
   }

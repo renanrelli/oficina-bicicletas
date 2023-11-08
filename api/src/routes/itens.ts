@@ -74,7 +74,7 @@ let itensController: ItensController = new ItensController();
 
 router.get("/itens", itensController.list);
 
-router.get("/itens/:id", validarSeExiste, itensController.find);
+router.get("/itens/:id", validarSeExiste, itensController.list);
 
 router.post(
   "/itens",
