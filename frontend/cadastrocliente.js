@@ -1,15 +1,27 @@
+let authorization = localStorage.getItem("authorization");
+
+if (!authorization) {
+  window.location.href = "login.html";
+}
+
 const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get('id');
+const id = urlParams.get("id");
 
-let inputNome = document.getElementById('nome');
-let inputEmail = document.getElementById('email');
-let inputCpf = document.getElementById('cpf');
-let inputEndereco = document.getElementById('endereco');
-let inputData_nascimento = document.getElementById('data_nascimento');
-let form = document.getElementById('formulario');
+let inputNome = document.getElementById("nome");
+let inputEmail = document.getElementById("email");
+let inputCpf = document.getElementById("cpf");
+let inputEndereco = document.getElementById("endereco");
+let inputData_nascimento = document.getElementById("data_nascimento");
+let form = document.getElementById("formulario");
 
-async function buscarDados () {
-  let resposta = await fetch('http://localhost:3000/clientes/' + id);
+async function buscarDados() {
+  let resposta = await fetch("http://localhost:3333/clientes/" + id, {
+    headers: {
+      "Content-type": "application/json",
+      Accept: "appplication/json",
+      Authorization: authorization,
+    },
+  });
   if (resposta.ok) {
     let cliente = await resposta.json();
     inputNome.value = cliente.nome;
@@ -21,7 +33,7 @@ async function buscarDados () {
     let e = await resposta.json();
     alert(e.error);
   } else {
-    alert('Ops! Algo deu errado!');
+    alert("Ops! Algo deu errado!");
   }
 }
 
@@ -29,7 +41,7 @@ if (id) {
   buscarDados();
 }
 
-form.addEventListener('submit', async (event) => {
+form.addEventListener("submit", async (event) => {
   event.stopPropagation();
   event.preventDefault();
 
@@ -45,27 +57,28 @@ form.addEventListener('submit', async (event) => {
     cpf,
     endereco,
     data_nascimento,
-  }
+  };
 
-  let url = 'http://localhost:3000/clientes';
-  let method = 'POST';
+  let url = "http://localhost:3333/clientes";
+  let method = "POST";
   if (id) {
-    url += '/' + id;
-    method = 'PUT';
+    url += "/" + id;
+    method = "PUT";
   }
 
   let resposta = await fetch(url, {
     method: method,
     headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json'
+      "Content-type": "application/json",
+      Accept: "appplication/json",
+      Authorization: authorization,
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (resposta.ok) {
-    window.location.href = 'cadastrocliente.html'
+    window.location.href = "cadastrocliente.html";
   } else {
-    alert('Ops! Algo deu errado!');
+    alert("Ops! Algo deu errado!");
   }
 });

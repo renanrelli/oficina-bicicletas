@@ -1,14 +1,26 @@
-let corpoTabela = document.getElementById('corpo-tabela');
+let authorization = localStorage.getItem("authorization");
 
-async function buscarItens () {
-  let resposta = await fetch('http://localhost:3000/itens');
+if (!authorization) {
+  window.location.href = "login.html";
+}
+
+let corpoTabela = document.getElementById("corpo-tabela");
+
+async function buscarItens() {
+  let resposta = await fetch("http://localhost:3333/itens", {
+    headers: {
+      "Content-type": "application/json",
+      Acccept: "appplication/json",
+      Authorization: authorization,
+    },
+  });
+
   let itens = await resposta.json();
-
   for (let item of itens) {
-    let tr = document.createElement('tr');
-    let tdNome = document.createElement('td');
-    let tdValor = document.createElement('td');
-    let tdAcoes = document.createElement('td');
+    let tr = document.createElement("tr");
+    let tdNome = document.createElement("td");
+    let tdValor = document.createElement("td");
+    let tdAcoes = document.createElement("td");
 
     tdNome.innerText = item.nome;
     tdValor.innerText = item.valor;
@@ -25,12 +37,19 @@ async function buscarItens () {
   }
 }
 
-async function excluir (id) {
+async function excluir(id) {
   try {
-    await fetch(`http://localhost:3000/itens/${id}`, { method: 'DELETE' });
+    await fetch(`http://localhost:3333/itens/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Acccept: "appplication/json",
+        Authorization: authorization,
+      },
+    });
     window.location.reload();
   } catch (error) {
-    console.error('Erro ao excluir item:', error);
+    console.error("Erro ao excluir item:", error);
   }
 
   window.location.reload();

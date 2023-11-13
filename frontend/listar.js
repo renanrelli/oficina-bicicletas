@@ -1,15 +1,26 @@
-let corpoTabela = document.getElementById('corpo-tabela');
+let corpoTabela = document.getElementById("corpo-tabela");
+let authorization = localStorage.getItem("authorization");
 
-async function buscarUsuarios () {
-  let resposta = await fetch('http://localhost:3000/usuarios');
+if (!authorization) {
+  window.location.href = "login.html";
+}
+
+async function buscarUsuarios() {
+  let resposta = await fetch("http://localhost:3333/usuarios", {
+    headers: {
+      "Content-type": "application/json",
+      Accept: "appplication/json",
+      Authorization: authorization,
+    },
+  });
   let usuarios = await resposta.json();
 
   for (let usuario of usuarios) {
-    let tr = document.createElement('tr');
-    let tdNome = document.createElement('td');
-    let tdEmail = document.createElement('td');
-    let tdSenha = document.createElement('td');
-    let tdAcoes = document.createElement('td');
+    let tr = document.createElement("tr");
+    let tdNome = document.createElement("td");
+    let tdEmail = document.createElement("td");
+    let tdSenha = document.createElement("td");
+    let tdAcoes = document.createElement("td");
 
     tdNome.innerText = usuario.nome;
     tdEmail.innerText = usuario.email;
@@ -27,17 +38,22 @@ async function buscarUsuarios () {
   }
 }
 
-async function excluir (id) {
+async function excluir(id) {
   try {
-    await fetch(`http://localhost:3000/usuarios/${id}`, { method: 'DELETE' });
+    await fetch(`http://localhost:3333/usuarios/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "appplication/json",
+        Authorization: authorization,
+      },
+    });
     window.location.reload();
   } catch (error) {
-    console.error('Erro ao excluir usuário:', error);
+    console.error("Erro ao excluir usuário:", error);
   }
 
   window.location.reload();
 }
 
 buscarUsuarios();
-
-

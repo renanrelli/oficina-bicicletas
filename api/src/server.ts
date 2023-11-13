@@ -7,7 +7,7 @@ import clientesRoutes from "./routes/clientes";
 import itensRoutes from "./routes/itens";
 
 let server: Express = express();
-let port: number = Number(process.env.SERVER_PORT || 3000);
+let port: number = Number(process.env.SERVER_PORT || 3333);
 
 server.use(cors());
 server.use(express.json());

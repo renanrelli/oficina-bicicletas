@@ -1,7 +1,6 @@
 import { Usuario } from "../models/Usuario";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { ILike } from "typeorm";
 
 export class UsuariosController {
   async list(req: Request, res: Response) {
