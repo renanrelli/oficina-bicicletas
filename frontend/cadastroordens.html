@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Document</title>
+</head>
+<body>
+  <h1>Manutenção Ordem serviço</h1>
+  <form id="formulario">
+    <div class="form-group">
+        <label for="nome">Nome do Cliente:</label>
+        <select id="nome">
+            <option value="">Selecione um cliente</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status">
+            <option value="orcamento">Orçamento</option>
+            <option value="em_andamento">Em andamento</option>
+            <option value="concluido">Concluído</option>
+        </select>
+    </div>
+    <br>
+    <label>Data de recebimento:</label>
+    <input type="date" id="data_recebimento" name="data_recebimento" required>
+    <br>
+    <label>Data de entrega:</label>
+    <input type="date" id="data_entrega" name="data_entrega" required>
+    <br>
+    <label>Descrição:</label>
+    <input type="string" id="descricao" name="descricao" required>
+    <br>
+    <a href="home.html">Voltar</a>
+    <button>Salvar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome Cliente</th>
+        <th>Status</th>
+        <th>Data de recebimento</th>
+        <th>Data de entrega</th>
+        <th>Descrição</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody id="corpo-tabela">
+    </tbody>
+    <script src="listarordens.js"></script>
+  </table>
+
+  <script src="cadastroordens.js"></script>
+</body>
+</html>
